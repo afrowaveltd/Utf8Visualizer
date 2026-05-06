@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+
+  <Commands package="guidUtf8VisualizerPkg">
+    <Groups>
+      <Group guid="guidUtf8VisualizerCmdSet" id="MyMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN"/>
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <Button guid="guidUtf8VisualizerCmdSet" id="cmdidToggleUtf8" priority="0x0100" type="Button">
+        <Parent guid="guidUtf8VisualizerCmdSet" id="MyMenuGroup" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Přepnout UTF-8 sekvenci na znaku</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+    <Bitmaps>
+      <Bitmap guid="guidImages" href="Resources\Icon32.png" usedList="bmpPic1"/>
+    </Bitmaps>
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="guidUtf8VisualizerPkg" value="{a1b2c3d4-e5f6-7890-abcd-ef1234567890}" />
+    <GuidSymbol name="guidUtf8VisualizerCmdSet" value="{c3d4e5f6-a7b8-9012-3c4d-5e6f7a8b9012}">
+      <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <IDSymbol name="cmdidToggleUtf8" value="0x0100" />
+    </GuidSymbol>
+    <GuidSymbol name="guidImages" value="{d4e5f6a7-b8c9-0123-4d5e-6f7a8b9c0123}" >
+      <IDSymbol name="bmpPic1" value="1" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

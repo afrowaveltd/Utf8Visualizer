@@ -1,0 +1,36 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v2
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Restore packages
+        run: nuget restore .\Utf8Visualizer\Utf8Visualizer.csproj
+
+      - name: Build VSIX project
+        run: msbuild .\Utf8Visualizer\Utf8Visualizer.csproj /t:Build /p:Configuration=Release /nologo
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Utf8Visualizer-vsix
+          path: |
+            Utf8Visualizer\bin\Release\*.vsix
+            Utf8Visualizer\bin\Release\*.dll
+            Utf8Visualizer\bin\Release\*.pkgdef
