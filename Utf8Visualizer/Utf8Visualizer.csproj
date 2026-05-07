@@ -60,6 +60,7 @@
     <Compile Include="Utf8AdornmentTaggerProvider.cs" />
     <Compile Include="ToggleUtf8Command.cs" />
     <Compile Include="ToggleUtf8CommandPackage.cs" />
+    <Compile Include="Utf8VisualizationState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">

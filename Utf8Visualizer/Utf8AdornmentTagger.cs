@@ -36,11 +36,12 @@ namespace Utf8Visualizer
             _buffer = buffer ?? throw new ArgumentNullException(nameof(buffer));
             _buffer.Changed += OnBufferChanged;
             _view.Closed += OnViewClosed;
+            Utf8VisualizationState.IsEnabledChanged += OnVisualizationStateChanged;
         }
 
         public IEnumerable<ITagSpan<IntraTextAdornmentTag>> GetTags(NormalizedSnapshotSpanCollection spans)
         {
-            if (spans.Count == 0)
+            if (!Utf8VisualizationState.IsEnabled || spans.Count == 0)
             {
                 yield break;
             }
@@ -76,6 +77,13 @@ namespace Utf8Visualizer
         {
             _buffer.Changed -= OnBufferChanged;
             _view.Closed -= OnViewClosed;
+            Utf8VisualizationState.IsEnabledChanged -= OnVisualizationStateChanged;
+        }
+
+        private void OnVisualizationStateChanged(object sender, EventArgs e)
+        {
+            var snapshot = _buffer.CurrentSnapshot;
+            RaiseTagsChanged(new SnapshotSpan(snapshot, 0, snapshot.Length));
         }
 
         private void RaiseTagsChanged(SnapshotSpan span)
